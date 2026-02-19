@@ -16,6 +16,7 @@ export class BookFormComponent implements OnInit {
   book: Book = { id: 0, title: '', author: '', isbn: '', publicationDate: '' };
   isEditMode: boolean = false;
   isLoading = false;
+  
 
   constructor(
     private bookService: BookService,

@@ -1,6 +1,11 @@
 <nav>
-  <a routerLink="/books">Books List</a> |
-  <a routerLink="/add-book">Add Book</a>
+  <span class="brand">📚 BookShelf</span>
+  <div class="nav-links">
+    <a routerLink="/books" routerLinkActive="active">Books List</a>
+    <a routerLink="/add-book" routerLinkActive="active">Add Book</a>
+  </div>
 </nav>
 <hr>
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router'; // add RouterModule
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.html',   // file must exist
-  styleUrls: ['./app.css']     // file must exist
+  imports: [RouterOutlet, RouterModule], // add RouterModule here
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
-export class AppComponent {                // class name must match export
+export class AppComponent {
   protected readonly title = signal('book-management-ui');
 }

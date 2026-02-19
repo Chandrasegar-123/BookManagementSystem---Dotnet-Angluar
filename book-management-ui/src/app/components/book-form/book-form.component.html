@@ -1,5 +1,8 @@
 <h2>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h2>
-<form (ngSubmit)="saveBook()">
+
+<p *ngIf="isLoading">Loading...</p>
+
+<form *ngIf="!isLoading" (ngSubmit)="saveBook()">
   <label>Title:</label>
   <input type="text" [(ngModel)]="book.title" name="title" required><br><br>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -15,18 +15,28 @@ import { Book } from '../../models/book';
 export class BookFormComponent implements OnInit {
   book: Book = { id: 0, title: '', author: '', isbn: '', publicationDate: '' };
   isEditMode: boolean = false;
+  isLoading = false;
 
   constructor(
     private bookService: BookService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef  // add this
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.isEditMode = true;
-      this.bookService.getBook(+id).subscribe(data => this.book = data);
+      this.isLoading = true;
+      this.bookService.getBook(+id).subscribe(data => {
+      this.book = { 
+        ...data,
+        publicationDate: new Date(data.publicationDate).toISOString().split('T')[0] // converts to yyyy-MM-dd
+      };
+      this.isLoading = false;
+      this.cdr.detectChanges();
+    });
     }
   }
 
